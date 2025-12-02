@@ -357,6 +357,7 @@
           </div>
         </div>
       </section>
+
 <section id="Gelados">
   <h2>Gelados</h2>
   <div class="produtos">
@@ -425,6 +426,12 @@
       let totalCarrinho = 0;
       let historicoVendas = [];
 
+      // ✅ CARREGAR HISTÓRICO DO LOCALSTORAGE
+      if (localStorage.getItem("historicoVendas")) {
+        historicoVendas = JSON.parse(localStorage.getItem("historicoVendas"));
+        exibirHistorico();
+      }
+
       carrinhoBtn.addEventListener("click", () => {
         carrinho.style.display =
           carrinho.style.display === "flex" ? "none" : "flex";
@@ -473,6 +480,10 @@
         };
 
         historicoVendas.push(compra);
+
+        // ✅ SALVAR NO LOCALSTORAGE
+        localStorage.setItem("historicoVendas", JSON.stringify(historicoVendas));
+
         exibirHistorico();
 
         itensCarrinho = [];
